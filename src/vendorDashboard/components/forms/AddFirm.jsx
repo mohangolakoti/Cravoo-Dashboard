@@ -95,6 +95,7 @@ const AddFirm = () => {
   return (
     <section className=" flex flex-col items-center w-full h-full">
       <h2 className="text-black font-bold text-xl py-2">Add Firm</h2>
+      <ToastContainer />
       <form
         onSubmit={firmSubmitHandler}
         className="justify-center bg-[#003D58] rounded-xl text-white px-10 py-2 text-lg leading-10 w-1/2"

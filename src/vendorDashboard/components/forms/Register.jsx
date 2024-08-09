@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { API_URL } from "../../data/ApiPath";
 import Nav from "../../pages/LandingPage/Nav";
 import { food, food1, food2, food4 } from "../../constants/images";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Register = ({showLoginHandler}) => {
   const [username, setUsername] = useState("");
@@ -23,7 +25,8 @@ const Register = ({showLoginHandler}) => {
       const data = await response.json();
       if (response.ok) {
         console.log(data);
-        alert("Vendor Registered Successfully");
+        //alert("Vendor Registered Successfully");
+        toast.success("Vendor Registered Successfully")
         setUsername("");
         setEmail("")
         setPassword("")
@@ -32,13 +35,15 @@ const Register = ({showLoginHandler}) => {
       }
     } catch (error) {
       console.log("Registration Failed", error);
-      alert("Registration Failed");
+      //alert("Registration Failed");
+      toast.error("Failed to Register")
     }
   };
 
   return (
     <section className={`flex flex-col w-full h-[100vh] overflow-x-hidden bg-[url(${food1})]`}>
       <Nav/>
+      <ToastContainer />
       <section className="w-full flex h-full">
       <img src={food4} alt="img" className="w-1/2 h-full hidden md:block" />
       <div className="md:w-1/2 w-full flex flex-col items-center gap-4 my-10">
