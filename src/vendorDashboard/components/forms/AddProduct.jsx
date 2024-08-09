@@ -1,5 +1,7 @@
 import React,{useState} from "react";
 import {API_URL} from '../../data/ApiPath'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddProduct = () => {
   const [productName, setProductName] = useState("");
@@ -52,7 +54,7 @@ const AddProduct = () => {
       })
       const data = await response.json()
       if(response.ok){
-        alert('Product added Successfully')
+        toast.info("Product added Successfully")
         setProductName("")
         setPrice("")
         setCategory([])
@@ -62,13 +64,14 @@ const AddProduct = () => {
       }
     } catch (error) {
       console.error(data.message);
-      alert('Failed to add Product')
+      toast.error("Failed to add product")
     }
   }
 
   return (
     <section className="flex flex-col items-center w-full h-screen overflow-auto">
       <h2 className="font-bold text-xl py-2">Add Product</h2>
+      <ToastContainer />
       <form
         onSubmit={productSubmitHandler}
         className="bg-[#003D58] rounded-xl text-white justify-center px-10 py-2 text-lg leading-10 md:w-1/2 w-2/3 max-[500px]:w-[90%]"

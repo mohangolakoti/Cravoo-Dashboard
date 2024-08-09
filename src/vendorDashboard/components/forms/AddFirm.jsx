@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import {API_URL} from '../../data/ApiPath'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddFirm = () => {
   const [firmName, setFirmName] = useState("");
@@ -38,7 +40,8 @@ const AddFirm = () => {
       const loginToken = localStorage.getItem("loginToken");
       if (!loginToken) {
         console.log("Token not found");
-        alert("Please login");
+        toast.warning("Please login")
+        /* alert("Please login"); */
       }
       const formData = new FormData();
       formData.append("firmName", firmName);
@@ -66,7 +69,8 @@ const AddFirm = () => {
         const firmName = data.vendorFirmName
         localStorage.setItem('firmId',firmId)
         localStorage.setItem('firmName',firmName)
-        alert("Firm added Successfully")
+        /* alert("Firm added Successfully") */
+        toast.info("Firm added Successfully")
         setFirmName("")
         setArea("")
         setCategory([])
@@ -75,14 +79,17 @@ const AddFirm = () => {
         setFile(null)
         window.location.reload()
       }else if(data.message==="Vendor can have only one Firm"){
-        alert("Firm already exists")
+        //alert("Firm already exists")
+        toast.warning("Firm already exists")
       }else{
-        alert("Failed to add Firm")
+        //alert("Failed to add Firm")
+        toast.error("Failed to add Firm")
       }
     
     } catch (error) {
       console.log(error)
-      alert("Failed to add firm")
+      //alert("Failed to add firm")
+      toast.error("Failed to add Firm")
     }
   };
   return (

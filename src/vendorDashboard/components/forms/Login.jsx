@@ -3,6 +3,8 @@ import { API_URL } from "../../data/ApiPath";
 import Nav from "../../pages/LandingPage/Nav";
 import { Link, useNavigate } from "react-router-dom";
 import { food, food1, food2 } from "../../constants/images";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -21,6 +23,7 @@ const Login = () => {
       });
       const data = await response.json();
       if (response.ok) {
+        toast.success(data.success);
         alert(data.success);
         localStorage.setItem("loginToken", data.token);
         if(data.firmId){
@@ -42,6 +45,7 @@ const Login = () => {
   return (
     <section className="flex flex-col items-center w-full h-[100vh] overflow-x-hidden">
       <Nav/>
+      <ToastContainer />
       <section className="w-full flex h-full">
       <img src={food1} alt="img" className="md:w-1/2 h-full hidden md:block" />
       <div className="md:w-1/2 w-full flex flex-col items-center gap-4 my-10">
